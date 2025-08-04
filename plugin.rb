@@ -8,6 +8,9 @@
 
 require_relative "lib/fortune_gpt"
 
+register_asset "javascripts/fortune-display.js"
+register_asset "stylesheets/common/fortune-gpt.scss"
+
 enabled_site_setting :fortune_enabled
 
 after_initialize do
