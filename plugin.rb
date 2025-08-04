@@ -8,6 +8,10 @@
 
 require_relative "lib/fortune_gpt"
 
+enabled_site_setting :fortune_gpt_enabled
+
+register_asset "javascripts/fortune-display.js", :client_side
+
 after_initialize do
   ::Discourse::Application.routes.append do
     mount ::FortuneGPT::Engine, at: "/fortune_gpt"

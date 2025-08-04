@@ -1,0 +1,5 @@
+{{#if this.fortune}}
+  <div class="fortune-text">{{this.fortune}}</div>
+{{else}}
+  <button class="fortune-btn" {{action "pickFortune"}}>오늘의 운세 뽑기</button>
+{{/if}}
