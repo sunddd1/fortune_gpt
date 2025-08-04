@@ -9,7 +9,7 @@ class CreateFortuneTables < ActiveRecord::Migration[6.0]
     create_table :fortune_gpt_user_fortunes do |t|
       t.references :user, null: false, foreign_key: true
       t.date :picked_on, null: false
-      t.references :fortune_gpt_fortune, null: false, foreign_key: true
+      t.references :fortune_gpt_fortune, null: false, foreign_key: { to_table: :fortune_gpt_fortunes }
 
       t.timestamps
     end
