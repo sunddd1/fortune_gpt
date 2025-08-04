@@ -8,7 +8,7 @@
 
 require_relative "lib/fortune_gpt"
 
-enabled_site_setting :fortune_gpt_enabled
+enabled_site_setting :fortune_enabled
 
 after_initialize do
   ::Discourse::Application.routes.append do

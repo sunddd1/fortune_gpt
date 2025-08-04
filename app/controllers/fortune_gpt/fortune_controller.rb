@@ -23,7 +23,7 @@ module FortuneGPT
         render json: {
                  errors: [
                    {
-                     message: I18n.t("fortune_gpt.errors.already_picked", default: "fortune already picked"),
+                     message: I18n.t("fortune.errors.already_picked", default: "fortune already picked"),
                    },
                  ],
                },
@@ -44,11 +44,23 @@ module FortuneGPT
         render json: {
                  errors: [
                    {
-                     message: I18n.t("fortune_gpt.errors.already_picked", default: "fortune already picked"),
+                     message: I18n.t("fortune.errors.already_picked", default: "fortune already picked"),
                    },
                  ],
                },
                status: 409
+        return
+      rescue StandardError => e
+        Rails.logger.error("Error creating fortune for user #{current_user.id}: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\\n"))
+        render json: {
+                 errors: [
+                   {
+                     message: e.message,
+                   },
+                 ],
+               },
+               status: 200
         return
       end
 
@@ -58,7 +70,7 @@ module FortuneGPT
     private
 
     def ensure_fortune_enabled
-      raise Discourse::NotFound unless SiteSetting.fortune_gpt_enabled
+      raise Discourse::NotFound unless SiteSetting.fortune_enabled
     end
 
     def serialize_fortune(user_fortune)
