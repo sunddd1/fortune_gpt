@@ -50,6 +50,18 @@ module FortuneGPT
                },
                status: 409
         return
+      rescue StandardError => e
+        Rails.logger.error("Error creating fortune for user #{current_user.id}: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\\n"))
+        render json: {
+                 errors: [
+                   {
+                     message: I18n.t("fortune_gpt.errors.internal_server_error", default: "internal server error"),
+                   },
+                 ],
+               },
+               status: 500
+        return
       end
 
       render json: { data: serialize_fortune(user_fortune) }, status: 201
