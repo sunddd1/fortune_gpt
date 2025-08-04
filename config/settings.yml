@@ -1,0 +1,4 @@
+plugins:
+  fortune_gpt_enabled:
+    default: false
+    type: bool
